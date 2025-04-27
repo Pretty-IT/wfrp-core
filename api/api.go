@@ -5,6 +5,7 @@ import (
 	"github.com/Pretty-IT/wfrp-core/internal/models"
 	"github.com/Pretty-IT/wfrp-core/internal/models/actions"
 	"github.com/Pretty-IT/wfrp-core/internal/models/charlist"
+	"github.com/Pretty-IT/wfrp-core/internal/rules"
 )
 
 func HelloWorld() string {
@@ -15,26 +16,12 @@ func HelloWorld() string {
 
 func CalculateRoll(actorState *charlist.State, targetState *charlist.State,
 	request actions.RollRequest, environment models.Environment) *actions.Roll {
-	var skillID = request.Skill
-	if request.Weapon != nil {
-		skillID = request.Weapon.Skill
-	}
-	var skill = actorState.Skills[skillID]
-	var char = actorState.Chars[skill.CharID()]
-
-	var target = char.Total() + skill.Total()
-
-	return &actions.Roll{
-		TargetCharValue: char.Total(),
-		TargetValue:     target,
-		TotalModifier:   0,
-		TotalSLModifier: 0,
-		ModifyOptions:   []actions.RollModifyOption{actions.Reroll},
-	}
+	return rules.CalculateRoll(actorState, targetState, request, environment)
 }
 
+// MakeDramaticTest - dice should be in interval [0-99]
 func MakeDramaticTest(dice int, roll *actions.Roll) *actions.RollResult {
-	return &actions.RollResult{}
+	return rules.DramaticTest(dice, roll)
 }
 
 func MakeOpposedTest(attacker *actions.RollResult, defender *actions.RollResult) *actions.OpposedResult {

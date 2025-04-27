@@ -29,7 +29,6 @@ const (
 )
 
 type Roll struct {
-	TargetCharValue int
 	TargetValue     int
 	TotalModifier   int
 	TotalSLModifier int
@@ -37,6 +36,8 @@ type Roll struct {
 }
 
 type RollResult struct {
-	IsPassed bool
-	SL       int
+	IsPassed   bool
+	SL         int
+	IsCritical bool
+	IsFumble   bool
 }

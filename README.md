@@ -16,3 +16,5 @@ Need instruction. For now, just use `Hello world` sample in `export.go` and `api
 ### Use as executable
 You can build a scenario from api calls in `main.go` file, build it as executable and run it.
 
+### Run tests
+Run `make test` or `go test -v ./...` in order to run all unit tests in project
