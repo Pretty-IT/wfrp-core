@@ -39,7 +39,7 @@ func (v *Value) Initial() int { return v.initial }
 
 func (v *Value) IsGrouped() bool { return v.template.specialization != "" }
 
-func (v *Value) Char() chars.ID { return v.template.char }
+func (v *Value) CharID() chars.ID { return v.template.char }
 
 func (v *Value) Total() int { return v.initial }
 

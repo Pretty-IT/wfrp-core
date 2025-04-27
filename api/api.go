@@ -3,7 +3,7 @@ package api
 import (
 	"fmt"
 	"github.com/Pretty-IT/wfrp-core/internal/models"
-	"github.com/Pretty-IT/wfrp-core/internal/models/action"
+	"github.com/Pretty-IT/wfrp-core/internal/models/actions"
 	"github.com/Pretty-IT/wfrp-core/internal/models/charlist"
 )
 
@@ -13,26 +13,41 @@ func HelloWorld() string {
 	return msg
 }
 
-func CalculateModifier(actorState *charlist.State, targetState *charlist.State,
-	actionRequest action.Request, environment models.Environment) *models.Modifier {
-	return &models.Modifier{}
+func CalculateRoll(actorState *charlist.State, targetState *charlist.State,
+	request actions.RollRequest, environment models.Environment) *actions.Roll {
+	var skillID = request.Skill
+	if request.Weapon != nil {
+		skillID = request.Weapon.Skill
+	}
+	var skill = actorState.Skills[skillID]
+	var char = actorState.Chars[skill.CharID()]
+
+	var target = char.Total() + skill.Total()
+
+	return &actions.Roll{
+		TargetCharValue: char.Total(),
+		TargetValue:     target,
+		TotalModifier:   0,
+		TotalSLModifier: 0,
+		ModifyOptions:   []actions.RollModifyOption{actions.Reroll},
+	}
 }
 
-func MakeDramaticTest(state *charlist.State, modifier *models.Modifier, roll int) (*models.TestResult, []models.TestModifyOption) {
-	return &models.TestResult{}, []models.TestModifyOption{}
+func MakeDramaticTest(dice int, roll *actions.Roll) *actions.RollResult {
+	return &actions.RollResult{}
 }
 
-func MakeOpposedTest(attacker *action.Opposed, defender *action.Opposed) *models.OpposedTestResult {
-	return &models.OpposedTestResult{}
+func MakeOpposedTest(attacker *actions.RollResult, defender *actions.RollResult) *actions.OpposedResult {
+	return &actions.OpposedResult{}
 }
 
-func MakeAttack(attacker *action.Opposed, defender *action.Opposed) (*models.OpposedTestResult, []*models.ResolveAttackOption) {
-	opposedResult := MakeOpposedTest(attacker, defender)
+func MakeAttack(attacker *actions.Opposed, defender *actions.Opposed) (*actions.OpposedResult, []*models.ResolveAttackOption) {
+	opposedResult := MakeOpposedTest(attacker.RollResult, defender.RollResult)
 	resolveOptions := resolveAttack(attacker, defender, opposedResult)
 	return opposedResult, resolveOptions
 }
 
-func resolveAttack(attacker *action.Opposed, defender *action.Opposed, result *models.OpposedTestResult) []*models.ResolveAttackOption {
+func resolveAttack(attacker *actions.Opposed, defender *actions.Opposed, result *actions.OpposedResult) []*models.ResolveAttackOption {
 	return []*models.ResolveAttackOption{}
 }
 

@@ -10,7 +10,6 @@ func main() {
 	api.HelloWorld()
 
 	var test = *chars.Template_value[chars.WeaponSkill]
-	test.name = "sfdfsdfsd"
 
 	fmt.Printf("%+v\n", test)
 	fmt.Printf("%+v\n", chars.Template_value[chars.WeaponSkill])
