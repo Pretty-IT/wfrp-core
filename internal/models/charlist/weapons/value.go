@@ -5,15 +5,15 @@ import (
 	"github.com/Pretty-IT/wfrp-core/internal/models/charlist/skills"
 )
 
-type Weapon struct {
+type Value struct {
 	Name      string
-	Skill     *skills.Skill
+	Skill     skills.ID
 	Damage    int
-	BonusChar *chars.Characteristic
+	BonusChar chars.ID
 }
 
-func New(name string, skill *skills.Skill, damage int, bonusChar *chars.Characteristic) *Weapon {
-	return &Weapon{
+func New(name string, skill skills.ID, damage int, bonusChar chars.ID) *Value {
+	return &Value{
 		Name:      name,
 		Skill:     skill,
 		Damage:    damage,
@@ -21,4 +21,4 @@ func New(name string, skill *skills.Skill, damage int, bonusChar *chars.Characte
 	}
 }
 
-func (w *Weapon) String() string { return w.Name }
+func (v *Value) String() string { return v.Name }

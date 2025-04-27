@@ -7,17 +7,18 @@ import (
 )
 
 func CommonCharacter() *State {
-	ws := chars.New(chars.WeaponSkill, 31)
-	s := chars.New(chars.Strength, 31)
-	t := chars.New(chars.Toughness, 31)
-	wp := chars.New(chars.Willpower, 31)
+	ws := chars.From(chars.WeaponSkill, 31)
+	s := chars.From(chars.Strength, 31)
+	t := chars.From(chars.Toughness, 31)
+	wp := chars.From(chars.Willpower, 31)
 
-	brawling := skills.New("Melee", "Brawling", ws, true, 10)
+	brawling := skills.From(skills.MeleeBrawling, 10)
 
-	punches := weapons.New("Punches", brawling, 0, s)
+	punches := weapons.New("Punches", skills.MeleeBrawling, 0, chars.Strength)
+
 	return NewState(
-		[]*chars.Characteristic{ws, s, t, wp},
-		[]*skills.Skill{brawling},
-		[]*weapons.Weapon{punches},
+		[]*chars.Value{ws, s, t, wp},
+		[]*skills.Value{brawling},
+		[]*weapons.Value{punches},
 	)
 }

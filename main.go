@@ -3,11 +3,15 @@ package main
 import (
 	"fmt"
 	"github.com/Pretty-IT/wfrp-core/api"
-	"github.com/Pretty-IT/wfrp-core/internal/models/charlist"
+	"github.com/Pretty-IT/wfrp-core/internal/models/charlist/chars"
 )
 
 func main() {
 	api.HelloWorld()
 
-	fmt.Printf("%+v\n", charlist.CommonCharacter())
+	var test = *chars.Template_value[chars.WeaponSkill]
+	test.name = "sfdfsdfsd"
+
+	fmt.Printf("%+v\n", test)
+	fmt.Printf("%+v\n", chars.Template_value[chars.WeaponSkill])
 }

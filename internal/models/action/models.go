@@ -17,8 +17,8 @@ const (
 type Request struct {
 	actionType Type
 	// only one of next 2 fields should be not null
-	weapon *weapons.Weapon
-	skill  *skills.Skill
+	weapon *weapons.Value
+	skill  *skills.Value
 }
 
 type Opposed struct {

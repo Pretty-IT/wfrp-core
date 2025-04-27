@@ -38,3 +38,11 @@ func MapMap[T, U any](input map[string]T, mapper func(T) U) (output map[string]U
 	}
 	return output
 }
+
+func SliceToMap[T any, K ~int](input []T, keyFunc func(T) K) (output map[K]T) {
+	for _, item := range input {
+		key := keyFunc(item)
+		output[key] = item
+	}
+	return
+}
