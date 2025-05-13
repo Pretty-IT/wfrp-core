@@ -7,12 +7,17 @@ import (
 )
 
 func CommonCharacter() *State {
-	ws := chars.From(chars.WeaponSkill, 31)
-	s := chars.From(chars.Strength, 31)
-	t := chars.From(chars.Toughness, 31)
-	wp := chars.From(chars.Willpower, 31)
+	return PlainCharacter(31, 10)
+}
 
-	brawling := skills.From(skills.MeleeBrawling, 10)
+// PlainCharacter - predefined character with all characteristics and skills equal to given value
+func PlainCharacter(charValue int, skillValue int) *State {
+	ws := chars.From(chars.WeaponSkill, charValue)
+	s := chars.From(chars.Strength, charValue)
+	t := chars.From(chars.Toughness, charValue)
+	wp := chars.From(chars.Willpower, charValue)
+
+	brawling := skills.From(skills.MeleeBrawling, skillValue)
 
 	punches := weapons.New("Punches", skills.MeleeBrawling, 0, chars.Strength)
 
