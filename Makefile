@@ -3,3 +3,6 @@ lib:
 
 exec:
 	go build -o build/wfrp-core main.go
+
+test:
+	go test -v ./...
