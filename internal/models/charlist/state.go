@@ -36,4 +36,16 @@ func (s *State) SetWounds(value int) {
 	s.Wounds = value
 }
 
+func (s *State) GetSkillValue(id skills.ID) int {
+	skill := s.Skills[id]
+	char := s.Chars[skill.CharID()]
+	return char.Total() + skill.Total()
+}
+
+func (s *State) GetCharValue(skillID skills.ID) int {
+	skill := s.Skills[skillID]
+	char := s.Chars[skill.CharID()]
+	return char.Total()
+}
+
 type Delta struct{}

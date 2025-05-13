@@ -11,7 +11,7 @@ type Opposed struct {
 }
 
 type OpposedResult struct {
-	isAttackerWinner bool
-	isTie            bool
+	IsAttackerWinner bool
+	IsTie            bool
 	SL               int
 }

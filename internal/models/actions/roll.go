@@ -16,8 +16,8 @@ type RollRequest struct {
 	ActionType Type
 
 	// only one of next 2 fields should be not null
-	Skill  skills.ID
-	Weapon *weapons.Value
+	SkillId skills.ID
+	Weapon  *weapons.Value
 }
 
 type RollModifyOption string
