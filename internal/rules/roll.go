@@ -7,12 +7,8 @@ import (
 )
 
 func CalculateRoll(actorState *charlist.State, targetState *charlist.State,
-	request actions.RollRequest, environment models.Environment) *actions.Roll {
-	skillID := request.SkillId
-	if request.Weapon != nil {
-		skillID = request.Weapon.Skill
-	}
-
+	request *actions.RollRequest, environment models.Environment) *actions.Roll {
+	skillID := request.GetSkillID()
 	target := actorState.GetSkillValue(skillID)
 
 	return &actions.Roll{

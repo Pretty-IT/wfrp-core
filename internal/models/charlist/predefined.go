@@ -10,8 +10,12 @@ func CommonCharacter() *State {
 	return PlainCharacter(31, 10)
 }
 
-// PlainCharacter - predefined character with all characteristics and skills equal to given value
 func PlainCharacter(charValue int, skillValue int) *State {
+	return PlainCharacterWithName("", charValue, skillValue)
+}
+
+// PlainCharacterWithName - predefined character with all characteristics and skills equal to given value
+func PlainCharacterWithName(name string, charValue int, skillValue int) *State {
 	ws := chars.From(chars.WeaponSkill, charValue)
 	s := chars.From(chars.Strength, charValue)
 	t := chars.From(chars.Toughness, charValue)
@@ -19,9 +23,10 @@ func PlainCharacter(charValue int, skillValue int) *State {
 
 	brawling := skills.From(skills.MeleeBrawling, skillValue)
 
-	punches := weapons.New("Punches", skills.MeleeBrawling, 0, chars.Strength)
+	punches := weapons.Punches
 
 	return NewState(
+		name,
 		[]*chars.Value{ws, s, t, wp},
 		[]*skills.Value{brawling},
 		[]*weapons.Value{punches},

@@ -15,6 +15,7 @@ func DramaticTest(dice int, roll *actions.Roll) *actions.RollResult {
 	var isPassed = dice < autoPassed || dice < autoFailed && result >= 0
 
 	return &actions.RollResult{
+		Dice:       dice,
 		IsPassed:   isPassed,
 		SL:         (result / 10) + roll.TotalSLModifier,
 		IsCritical: isDiceDouble && isPassed,

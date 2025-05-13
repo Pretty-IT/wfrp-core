@@ -30,8 +30,8 @@ func MapList[T, U any](input []T, mapper func(T) U) (output []U) {
 	return output
 }
 
-func MapMap[T, U any](input map[string]T, mapper func(T) U) (output map[string]U) {
-	output = make(map[string]U)
+func MapMap[K ~int | string, V1, V2 any](input map[K]V1, mapper func(V1) V2) (output map[K]V2) {
+	output = make(map[K]V2)
 
 	for key, value := range input {
 		output[key] = mapper(value)

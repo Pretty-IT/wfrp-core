@@ -15,7 +15,7 @@ func HelloWorld() string {
 }
 
 func CalculateRoll(actorState *charlist.State, targetState *charlist.State,
-	request actions.RollRequest, environment models.Environment) *actions.Roll {
+	request *actions.RollRequest, environment models.Environment) *actions.Roll {
 	return rules.CalculateRoll(actorState, targetState, request, environment)
 }
 

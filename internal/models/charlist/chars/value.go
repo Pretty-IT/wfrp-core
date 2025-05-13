@@ -6,7 +6,7 @@ type Value struct {
 }
 
 func From(id ID, initial int) *Value {
-	var tmpl = *Template_value[id]
+	var tmpl = *TemplateValue[id]
 
 	return &Value{
 		template: tmpl,
@@ -15,6 +15,8 @@ func From(id ID, initial int) *Value {
 }
 
 func (v *Value) Name() string { return v.template.name }
+
+func (v *Value) ShortName() string { return v.template.shortName }
 
 func (v *Value) Initial() int { return v.initial }
 

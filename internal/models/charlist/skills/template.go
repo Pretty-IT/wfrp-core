@@ -1,6 +1,9 @@
 package skills
 
-import "github.com/Pretty-IT/wfrp-core/internal/models/charlist/chars"
+import (
+	"fmt"
+	"github.com/Pretty-IT/wfrp-core/internal/models/charlist/chars"
+)
 
 type ID int
 
@@ -16,6 +19,16 @@ type Template struct {
 	specialization string
 }
 
+func (t *Template) FullName() string {
+	result := t.name
+	if t.IsGrouped() {
+		result = fmt.Sprintf("%s(%s)", t.name, t.specialization)
+	}
+	return result
+}
+
+func (t *Template) IsGrouped() bool { return t.specialization != "" }
+
 func newTemplate(id ID, name string, specialization string, char chars.ID, isBasic bool) *Template {
 	return &Template{
 		id:             id,
@@ -26,6 +39,6 @@ func newTemplate(id ID, name string, specialization string, char chars.ID, isBas
 	}
 }
 
-var Template_value = map[ID]*Template{
+var TemplateValue = map[ID]*Template{
 	MeleeBrawling: newTemplate(MeleeBrawling, "Melee", "Brawling", chars.WeaponSkill, true),
 }
