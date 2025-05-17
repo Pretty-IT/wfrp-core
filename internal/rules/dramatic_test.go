@@ -1,7 +1,7 @@
 package rules
 
 import (
-	a "github.com/Pretty-IT/wfrp-core/internal/models/actions"
+	a "github.com/Pretty-IT/wfrp-core/internal/models"
 	"github.com/Pretty-IT/wfrp-core/internal/test"
 	"github.com/stretchr/testify/assert"
 	"testing"

@@ -32,6 +32,19 @@ func NewState(name string, c []*chars.Value, s []*skills.Value, w []*weapons.Val
 	return result
 }
 
+func From(state *State) *State {
+	result := &State{
+		Name:    state.Name,
+		Chars:   utils.CopyMap(state.Chars),
+		Skills:  utils.CopyMap(state.Skills),
+		Wounds:  state.Wounds,
+		Weapons: utils.CopyList(state.Weapons),
+	}
+
+	result.SetWounds(result.MaxWounds())
+	return result
+}
+
 func (s *State) MaxWounds() int {
 	return s.Chars[chars.Strength].Bonus() +
 		s.Chars[chars.Toughness].Bonus()*2 +
@@ -77,5 +90,3 @@ func (s *State) getSkillsString() string {
 	})
 	return strings.Join(slices.Collect(maps.Values(results)), ", ")
 }
-
-type Delta struct{}

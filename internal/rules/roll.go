@@ -2,19 +2,18 @@ package rules
 
 import (
 	"github.com/Pretty-IT/wfrp-core/internal/models"
-	"github.com/Pretty-IT/wfrp-core/internal/models/actions"
 	"github.com/Pretty-IT/wfrp-core/internal/models/charlist"
 )
 
 func CalculateRoll(actorState *charlist.State, targetState *charlist.State,
-	request *actions.RollRequest, environment models.Environment) *actions.Roll {
+	request *models.RollRequest, environment models.Environment) *models.Roll {
 	skillID := request.GetSkillID()
 	target := actorState.GetSkillValue(skillID)
 
-	return &actions.Roll{
+	return &models.Roll{
 		TargetValue:     target,
 		TotalModifier:   0,
 		TotalSLModifier: 0,
-		ModifyOptions:   []actions.RollModifyOption{},
+		ModifyOptions:   []models.RollModifyOption{},
 	}
 }

@@ -48,3 +48,20 @@ func SliceToMap[T any, K ~int](input []T, keyFunc func(T) K) (output map[K]T) {
 	}
 	return
 }
+
+func CopyMap[T any, K ~int](input map[K]T) (output map[K]T) {
+	output = make(map[K]T)
+
+	for k, v := range input {
+		output[k] = v
+	}
+	return
+}
+
+func CopyList[T any](input []T) (output []T) {
+	output = make([]T, len(input))
+	for i := range input {
+		output[i] = input[i]
+	}
+	return output
+}

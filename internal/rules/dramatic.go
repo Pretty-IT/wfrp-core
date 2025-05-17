@@ -1,9 +1,11 @@
 package rules
 
-import "github.com/Pretty-IT/wfrp-core/internal/models/actions"
+import (
+	"github.com/Pretty-IT/wfrp-core/internal/models"
+)
 
 // DramaticTest - dice should be in interval [0-99]
-func DramaticTest(dice int, roll *actions.Roll) *actions.RollResult {
+func DramaticTest(dice int, roll *models.Roll) *models.RollResult {
 	var autoPassed = 6
 	var autoFailed = 96
 
@@ -14,7 +16,7 @@ func DramaticTest(dice int, roll *actions.Roll) *actions.RollResult {
 	var result = roll.TargetValue + roll.TotalModifier - dice
 	var isPassed = dice < autoPassed || dice < autoFailed && result >= 0
 
-	return &actions.RollResult{
+	return &models.RollResult{
 		Dice:       dice,
 		IsPassed:   isPassed,
 		SL:         (result / 10) + roll.TotalSLModifier,

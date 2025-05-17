@@ -3,7 +3,8 @@ package chars
 type ID int
 
 const (
-	WeaponSkill ID = iota
+	Undefined ID = iota
+	WeaponSkill
 	BallisticSkill
 	Strength
 	Toughness
