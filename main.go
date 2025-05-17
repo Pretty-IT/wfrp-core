@@ -5,7 +5,6 @@ import (
 	"github.com/Pretty-IT/wfrp-core/api"
 	"github.com/Pretty-IT/wfrp-core/internal/models"
 	"github.com/Pretty-IT/wfrp-core/internal/models/charlist"
-	"github.com/Pretty-IT/wfrp-core/internal/rules"
 )
 
 func main() {
@@ -17,9 +16,10 @@ func main() {
 	aOpposed := getOpposed(models.Attack, attacker, defender, 10)
 	dOpposed := getOpposed(models.Defend, defender, attacker, 60)
 
-	attackerResult, defenderResult := rules.Attack(aOpposed, dOpposed)
+	attackerResult, defenderResult := api.MakeAttack(aOpposed, dOpposed)
+
 	if attackerResult.Damage.Total() > 0 {
-		defender = rules.ApplyDamage(defender, attackerResult.Damage)
+		defender = api.ApplyDamage(defender, attackerResult.Damage)
 	}
 	fmt.Printf("%+v\n", aOpposed)
 	fmt.Printf("%+v\n", dOpposed)
@@ -34,8 +34,9 @@ func getOpposed(action models.Type, subject *charlist.State, target *charlist.St
 	weapon := subject.Weapons[0]
 	request := &models.RollRequest{ActionType: action, Weapon: weapon}
 
-	roll := rules.CalculateRoll(subject, target, request, models.Environment{})
-	dramatic := rules.DramaticTest(dice, roll)
+	roll := api.CalculateRoll(subject, target, request, &models.Environment{})
+	dramatic := api.MakeDramaticTest(dice, roll)
+	// There are no rerolls here, but they can be
 
 	return &models.Opposed{
 		State:       subject,

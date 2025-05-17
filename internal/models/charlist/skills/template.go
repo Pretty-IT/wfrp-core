@@ -8,7 +8,8 @@ import (
 type ID int
 
 const (
-	MeleeBrawling ID = iota
+	Undefined ID = iota
+	MeleeBrawling
 )
 
 type Template struct {

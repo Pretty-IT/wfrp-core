@@ -17,12 +17,12 @@ type RollRequest struct {
 	ActionType Type
 
 	// only one of next 2 fields should be not null
-	SkillId skills.ID
+	SkillID skills.ID
 	Weapon  *weapons.Value
 }
 
 func (r *RollRequest) GetSkillID() skills.ID {
-	result := r.SkillId
+	result := r.SkillID
 	if r.Weapon != nil {
 		result = r.Weapon.Skill
 	}

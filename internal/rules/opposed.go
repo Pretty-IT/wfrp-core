@@ -5,8 +5,8 @@ import (
 )
 
 func OpposedTest(attacker *models.Opposed, defender *models.Opposed) *models.OpposedResult {
-	attackerSkill := attacker.RollRequest.SkillId
-	defenderSkill := defender.RollRequest.SkillId
+	attackerSkill := attacker.RollRequest.GetSkillID()
+	defenderSkill := defender.RollRequest.GetSkillID()
 
 	resultSL := attacker.RollResult.SL - defender.RollResult.SL
 	resultSkill := attacker.State.GetSkillValue(attackerSkill) - defender.State.GetSkillValue(defenderSkill)
