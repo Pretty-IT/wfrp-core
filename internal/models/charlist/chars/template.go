@@ -3,7 +3,8 @@ package chars
 type ID int
 
 const (
-	WeaponSkill ID = iota
+	Undefined ID = iota
+	WeaponSkill
 	BallisticSkill
 	Strength
 	Toughness
@@ -16,23 +17,24 @@ const (
 )
 
 type Template struct {
-	id   ID
-	name string
+	id        ID
+	name      string
+	shortName string
 }
 
-func newTemplate(id ID, name string) *Template {
-	return &Template{id: id, name: name}
+func newTemplate(id ID, name string, shortName string) *Template {
+	return &Template{id: id, name: name, shortName: shortName}
 }
 
-var Template_value = map[ID]*Template{
-	WeaponSkill:    newTemplate(WeaponSkill, "Weapon Skill"),
-	BallisticSkill: newTemplate(BallisticSkill, "Ballistic Skill"),
-	Strength:       newTemplate(Strength, "Strength"),
-	Toughness:      newTemplate(Toughness, "Toughness"),
-	Initiative:     newTemplate(Initiative, "Initiative"),
-	Agility:        newTemplate(Agility, "Agility"),
-	Dexterity:      newTemplate(Dexterity, "Dexterity"),
-	Intelligence:   newTemplate(Intelligence, "Intelligence"),
-	Willpower:      newTemplate(Willpower, "Willpower"),
-	Fellowship:     newTemplate(Fellowship, "Fellowship"),
+var TemplateValue = map[ID]*Template{
+	WeaponSkill:    newTemplate(WeaponSkill, "Weapon Skill", "WS"),
+	BallisticSkill: newTemplate(BallisticSkill, "Ballistic Skill", "BS"),
+	Strength:       newTemplate(Strength, "Strength", "S"),
+	Toughness:      newTemplate(Toughness, "Toughness", "T"),
+	Initiative:     newTemplate(Initiative, "Initiative", "I"),
+	Agility:        newTemplate(Agility, "Agility", "Ag"),
+	Dexterity:      newTemplate(Dexterity, "Dexterity", "Dex"),
+	Intelligence:   newTemplate(Intelligence, "Intelligence", "Int"),
+	Willpower:      newTemplate(Willpower, "Willpower", "WP"),
+	Fellowship:     newTemplate(Fellowship, "Fellowship", "Fel"),
 }

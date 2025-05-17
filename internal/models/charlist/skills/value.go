@@ -1,7 +1,6 @@
 package skills
 
 import (
-	"fmt"
 	"github.com/Pretty-IT/wfrp-core/internal/models/charlist/chars"
 )
 
@@ -11,7 +10,7 @@ type Value struct {
 }
 
 func From(id ID, initial int) *Value {
-	var tmpl = *Template_value[id]
+	var tmpl = *TemplateValue[id]
 
 	return &Value{
 		template: tmpl,
@@ -24,11 +23,7 @@ func (v *Value) Name() string {
 }
 
 func (v *Value) FullName() string {
-	result := v.template.name
-	if v.IsGrouped() {
-		result = fmt.Sprintf("%s(%s)", v.template.name, v.template.specialization)
-	}
-	return result
+	return v.template.FullName()
 }
 
 func (v *Value) IsBasic() bool { return v.template.isBasic }
@@ -37,7 +32,7 @@ func (v *Value) Specialization() string { return v.template.specialization }
 
 func (v *Value) Initial() int { return v.initial }
 
-func (v *Value) IsGrouped() bool { return v.template.specialization != "" }
+func (v *Value) IsGrouped() bool { return v.template.IsGrouped() }
 
 func (v *Value) CharID() chars.ID { return v.template.char }
 
